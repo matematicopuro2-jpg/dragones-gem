@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: dragones-gem
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js

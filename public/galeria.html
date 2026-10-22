@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galería de cartas</title>
+<style>
+body{margin:0;background:#0c0807;color:#f0e4da;font-family:system-ui,sans-serif;padding:16px}
+h1{margin:0 0 4px;color:#ffd36b}#info{color:#b9a092;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.c{background:#1c110f;border:1px solid #4a2a22;border-radius:10px;overflow:hidden}
+.c img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:top;display:block;background:#000}
+.c div{padding:6px 8px;font-size:13px}.c small{color:#b9a092}.falta{opacity:.35}
+</style></head><body>
+<h1>🐉 Galería de ilustraciones</h1><div id="info"></div><div class="grid" id="g"></div>
+<script>
+async function cargar(){
+  const [d, arte] = await Promise.all([fetch("cartas.json").then(r=>r.json()), fetch("/api/arte").then(r=>r.json())]);
+  const set = new Set(arte); let hechas = 0;
+  document.getElementById("g").innerHTML = d.cartas.map(c => {
+    const ed = ["jpg","jpeg","png","webp"].find(e => set.has(`${c.id}_edit.${e}`));
+    const ok = ed || set.has(c.id + ".jpg"); if (ed) hechas++;
+    const src = ed ? `art/${c.id}_edit.${ed}?${Date.now()}` : ok ? `art/${c.id}.jpg?${Date.now()}` : `art/${c.id}.svg`;
+    return `<div class="c ${ok ? "" : "falta"}"><img src="${src}" loading="lazy"><div>${c.nombre}<br><small>${c.id}${ed ? " · ✅ editada" : ""}</small></div></div>`;
+  }).join("");
+  document.getElementById("info").textContent = `${hechas} de ${d.cartas.length} cartas editadas por ti · se actualiza cada minuto`;
+}
+cargar(); setInterval(cargar, 60000);
+</script></body></html>

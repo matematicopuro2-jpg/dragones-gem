@@ -1,0 +1,1109 @@
+{
+ "version": "2.0",
+ "sets": {
+  "t1": {
+   "nombre": "Temporada 1 · La Guarida",
+   "desc": "Juego base completo. Se puede jugar solo."
+  },
+  "t2": {
+   "nombre": "Temporada 2 · Titanes",
+   "desc": "Expansión: se agrega a la Temporada 1."
+  }
+ },
+ "cartas": [
+  {
+   "id": "cria_ascua",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Ascua",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_escarcha",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Escarcha",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_ceniza",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Ceniza",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_trueno",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Trueno",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_musgo",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Musgo",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_obsidiana",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Obsidiana",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_marea",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Marea",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_bronce",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Bronce",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_niebla",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Niebla",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_rubi",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Rubí",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_azufre",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Azufre",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_tormenta",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Tormenta",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_hueso",
+   "set": "t1",
+   "tipo": "cria",
+   "nombre": "Cría Hueso",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "com_rojo",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón Rojo Cualquiera",
+   "texto": "Escupe fuego. A veces a propósito.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_pantano",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón de Pantano",
+   "texto": "Huele raro, pero cuenta igual.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_oficina",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón Azul de Oficina",
+   "texto": "Vuela de 9 a 5. Ni un minuto más.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_dramatico",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón Negro Dramático",
+   "texto": "Siempre entra con humo y música épica.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_tacano",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón Dorado Tacaño",
+   "texto": "No comparte su tesoro. Ni el tuyo.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_dormilon",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón Gris Dormilón",
+   "texto": "Lleva tres siglos durmiendo. Hoy tampoco.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_gimnasta",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Dragón de Bronce Gimnasta",
+   "texto": "Nunca se salta el día de alas.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_leviatan",
+   "set": "t1",
+   "tipo": "comun",
+   "nombre": "Leviatán Común",
+   "texto": "Una serpiente marina sin poderes. Pero qué bien nada.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_llamero",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Llamero",
+   "texto": "Al entrar en tu guarida, cada jugador (tú incluido) DESCARTA una carta. Luego baraja las Cenizas dentro del mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_veloz",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Veloz",
+   "texto": "Al entrar en tu guarida, toma una carta ¡GRRR! de las Cenizas a tu mano. Si este dragón fuera a ser SACRIFICADO o CALCINADO, devuélvelo a tu mano.",
+   "cantidad": 1,
+   "tags": [
+    "regresa"
+   ]
+  },
+  {
+   "id": "anc_molesto",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Mosquito",
+   "texto": "Al entrar en tu guarida, elige a un jugador: ese jugador DESCARTA una carta. Si este dragón fuera a ser SACRIFICADO o CALCINADO, devuélvelo a tu mano.",
+   "cantidad": 1,
+   "tags": [
+    "regresa"
+   ]
+  },
+  {
+   "id": "anc_codicioso",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Codicioso",
+   "texto": "Al entrar en tu guarida, ROBA una carta. Si este dragón fuera a ser SACRIFICADO o CALCINADO, devuélvelo a tu mano.",
+   "cantidad": 1,
+   "tags": [
+    "regresa"
+   ]
+  },
+  {
+   "id": "anc_majestuoso",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Majestuoso",
+   "texto": "Al entrar en tu guarida, toma un Dragón de las Cenizas a tu mano. Si este dragón fuera a ser SACRIFICADO o CALCINADO, devuélvelo a tu mano.",
+   "cantidad": 1,
+   "tags": [
+    "regresa"
+   ]
+  },
+  {
+   "id": "anc_gran_leviatan",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "El Gran Leviatán",
+   "texto": "Al entrar en tu guarida, busca en el mazo una carta con «Leviatán» en el nombre y agrégala a tu mano. Baraja el mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_lev_elegante",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Leviatán Elegante",
+   "texto": "Al entrar en tu guarida, busca en el mazo una Reliquia y agrégala a tu mano. Baraja el mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_lev_pirata",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Leviatán Pirata",
+   "texto": "Al entrar en tu guarida, busca en el mazo una Maldición y agrégala a tu mano. Baraja el mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_lev_torpedo",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Leviatán Torpedo",
+   "texto": "Al entrar en tu guarida, SACRIFICA todas las Maldiciones de tu guarida.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_lev_sirena",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Leviatán Encantador",
+   "texto": "Al entrar en tu guarida, SAQUEA una Reliquia. Si este dragón sale de tu guarida, devuelve esa Reliquia a la guarida de la que la tomaste.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_mazorca",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Mazorca",
+   "texto": "Al entrar en tu guarida, ROBA 2 cartas y luego DESCARTA 1.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_gatito",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragoncito Gatuno",
+   "texto": "Este dragón no puede ser CALCINADO por Hechizos.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_tiburon",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Tiburón",
+   "texto": "Al entrar en tu guarida, puedes SACRIFICAR este dragón. Si lo haces, CALCINA un dragón.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_caballero",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Caballero Negro",
+   "texto": "Si un dragón de tu guarida fuera a ser CALCINADO, puedes SACRIFICAR este dragón en su lugar.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_fenix",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Fénix",
+   "texto": "Si este dragón fuera a ser SACRIFICADO o CALCINADO, puedes DESCARTAR una carta de Dragón. Si lo haces, este dragón vuelve a tu guarida.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_sirena",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragona Sirena",
+   "texto": "Al entrar en tu guarida, devuelve una carta de la guarida de otro jugador a la mano de su dueño.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_reina",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragona Reina Avispa",
+   "texto": "Mientras esté en tu guarida, los Dragones Comunes no pueden entrar en la guarida de ningún otro jugador.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_colosal",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Colosal",
+   "texto": "Este dragón cuenta como 2 dragones. No puedes jugar cartas ¡GRRR!.",
+   "cantidad": 1,
+   "tags": [
+    "doble"
+   ]
+  },
+  {
+   "id": "anc_seductor",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Seductor",
+   "texto": "Al entrar en tu guarida, SAQUEA un dragón. Si este dragón sale de tu guarida, devuelve el dragón robado a la guarida de la que lo tomaste.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_destructor",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Destructor",
+   "texto": "Al entrar en tu guarida, cada jugador (tú incluido) SACRIFICA un dragón.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_zombi",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Zombi",
+   "texto": "Al inicio de tu turno, puedes DESCARTAR una carta de Dragón. Si lo haces, trae un dragón de las Cenizas directamente a tu guarida y termina tu turno de inmediato.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "anc_motosierra",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Motosierra",
+   "texto": "Al entrar en tu guarida, puedes CALCINAR una Reliquia o SACRIFICAR una Maldición.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_arcoiris",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Arcoíris",
+   "texto": "Al entrar en tu guarida, puedes traer un Dragón Común de tu mano directamente a tu guarida.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_perro",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Perrodragón",
+   "texto": "Cada vez que un jugador empieza su turno, mueve esta carta a la guarida de ese jugador. Esta carta no puede ser SACRIFICADA ni CALCINADA.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "anc_fertil",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragona Ultrafértil",
+   "texto": "Al inicio de tu turno, puedes DESCARTAR una carta. Si lo haces, trae una Cría del Criadero directamente a tu guarida.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "anc_rinoceronte",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Rinoceronte",
+   "texto": "Al inicio de tu turno, puedes CALCINAR un dragón. Si lo haces, tu turno termina de inmediato.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "anc_angel",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Ángel",
+   "texto": "Al inicio de tu turno, puedes SACRIFICAR este dragón. Si lo haces, trae un dragón de las Cenizas directamente a tu guarida.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "anc_mariposa",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Mariposa",
+   "texto": "Al entrar en tu guarida, puedes traer un Dragón Común de las Cenizas directamente a tu guarida.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_vigia",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Vigía",
+   "texto": "Al entrar en tu guarida, mira la mano de otro jugador y toma una carta de ella.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_avaro",
+   "set": "t1",
+   "tipo": "ancestral",
+   "nombre": "Dragón Avaro",
+   "texto": "Al inicio de tu turno, ROBA 1 carta adicional.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "hec_veneno",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Veneno de Basilisco",
+   "texto": "CALCINA un dragón.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "hec_coz",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Coletazo",
+   "texto": "Devuelve una carta de la guarida de otro jugador a su mano. Ese jugador DESCARTA una carta.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "hec_suerte",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Giro de la Suerte",
+   "texto": "ROBA 2 cartas y DESCARTA 3. Luego juega un turno extra.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "hec_tornado",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Tornado de Ceniza",
+   "texto": "Devuelve a la mano de su dueño una carta de la guarida de cada jugador (incluida la tuya).",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_cambio",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Intercambio de Nidos",
+   "texto": "Mueve un dragón de tu guarida a la de otro jugador. Luego SAQUEA un dragón de la guarida de ese jugador.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_redirigir",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Desviar la Magia",
+   "texto": "Mueve una Reliquia o una Maldición de cualquier guarida a cualquier otra guarida.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "hec_trato",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Trato Injusto",
+   "texto": "Intercambia tu mano con la de otro jugador.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "hec_dosporuno",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Dos por Uno",
+   "texto": "SACRIFICA una carta. Luego CALCINA 2 cartas.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "hec_encoger",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Rayo Encogedor",
+   "texto": "Elige a un jugador: mueve todos sus dragones (no Crías) a Cenizas y reemplázalos con el mismo número de Crías del Criadero. Si no alcanzan las crías, no se puede jugar.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_preciso",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Ataque Preciso",
+   "texto": "CALCINA una Reliquia o SACRIFICA una Maldición.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_vortice",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Vórtice Místico",
+   "texto": "Cada jugador DESCARTA una carta. Luego baraja las Cenizas dentro del mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_buen_trato",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Buen Botín",
+   "texto": "ROBA 3 cartas y luego DESCARTA 1.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_sacudon",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Sacudón",
+   "texto": "Baraja esta carta, tu mano y las Cenizas dentro del mazo. ROBA 5 cartas.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_robo",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Robo Descarado",
+   "texto": "Mira la mano de otro jugador. Elige una carta y agrégala a tu mano.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_reinicio",
+   "set": "t1",
+   "tipo": "hechizo",
+   "nombre": "Cataclismo",
+   "texto": "Cada jugador SACRIFICA todas sus Reliquias y Maldiciones. Luego baraja las Cenizas dentro del mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "rel_melena",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Melena de Fuego",
+   "texto": "Solo puedes jugar esta carta si tienes un Dragón Común en tu guarida. Al inicio de tu turno, puedes traer un Dragón Común de tu mano directamente a tu guarida.",
+   "cantidad": 3,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_cola",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Cola Extra",
+   "texto": "Solo puedes jugar esta carta si tienes un Dragón Común en tu guarida. Al inicio de tu turno, puedes ROBAR una carta adicional.",
+   "cantidad": 3,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_rugido",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "¡Rugido de Victoria!",
+   "texto": "Mientras esté en tu guarida, las cartas que juegas no pueden recibir ¡GRRR!.",
+   "cantidad": 2,
+   "tags": [
+    "sinGrrr"
+   ]
+  },
+  {
+   "id": "rel_bomba",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Bomba de Azufre",
+   "texto": "Al inicio de tu turno, puedes SACRIFICAR una carta. Si lo haces, CALCINA una carta.",
+   "cantidad": 2,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_aura",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Aura de Escamas",
+   "texto": "Tus dragones no pueden ser CALCINADOS.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "rel_doble",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Doble Garra",
+   "texto": "En tu fase de acción puedes jugar 2 cartas.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "rel_ritual",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Ritual de Invocación",
+   "texto": "Al inicio de tu turno, puedes DESCARTAR 2 cartas de Dragón. Si lo haces, trae un dragón de las Cenizas directamente a tu guarida.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_lazo",
+   "set": "t1",
+   "tipo": "reliquia",
+   "nombre": "Cadena de Domador",
+   "texto": "Al inicio de tu turno, puedes SAQUEAR un dragón. Al final de tu turno, devuélvelo a la guarida de la que lo tomaste.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "mal_alambre",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Alambre de Púas",
+   "texto": "Cada vez que un dragón entra o sale de tu guarida, DESCARTA una carta.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "mal_gallinas",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Gallinocalipsis",
+   "texto": "Todos tus dragones son gallinas. Las gallinas no son dragones: no cuentan para ganar.",
+   "cantidad": 1,
+   "tags": [
+    "nocuenta"
+   ]
+  },
+  {
+   "id": "mal_sadico",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Ritual Sádico",
+   "texto": "Al inicio de tu turno, SACRIFICA un dragón y luego ROBA una carta.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "mal_lentitud",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Lentitud",
+   "texto": "No puedes jugar cartas ¡GRRR!.",
+   "cantidad": 1,
+   "tags": [
+    "noInstant"
+   ]
+  },
+  {
+   "id": "mal_camara",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Ojo Espía",
+   "texto": "Juega con tu mano visible para todos.",
+   "cantidad": 1,
+   "tags": [
+    "manoVisible"
+   ]
+  },
+  {
+   "id": "mal_rota",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Guarida Derrumbada",
+   "texto": "No puedes jugar Reliquias.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "mal_ceguera",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Luz Cegadora",
+   "texto": "Los efectos de tus Dragones no se activan.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "mal_pequena",
+   "set": "t1",
+   "tipo": "maldicion",
+   "nombre": "Guarida Diminuta",
+   "texto": "Si tienes más de 5 dragones en tu guarida, SACRIFICA hasta quedarte con 5.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "grrr",
+   "set": "t1",
+   "tipo": "instantanea",
+   "nombre": "¡GRRR!",
+   "texto": "Juega esta carta cuando otro jugador intente jugar una carta. Esa carta no entra en juego y va a Cenizas.",
+   "cantidad": 13,
+   "tags": [
+    "grrr"
+   ]
+  },
+  {
+   "id": "rugido_supremo",
+   "set": "t1",
+   "tipo": "instantanea",
+   "nombre": "Rugido Supremo",
+   "texto": "Juega esta carta cuando otro jugador intente jugar una carta. Esa carta no entra en juego y va a Cenizas. Esta carta no puede recibir ¡GRRR!.",
+   "cantidad": 1,
+   "tags": [
+    "grrr",
+    "supremo"
+   ]
+  },
+  {
+   "id": "cria_titan_roja",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Roja",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_titan_azul",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Azul",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_titan_verde",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Verde",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_titan_naranja",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Naranja",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_titan_negra",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Negra",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "cria_titan_rosa",
+   "set": "t2",
+   "tipo": "cria",
+   "nombre": "Cría de Titán Rosa",
+   "texto": "Si esta carta fuera a ser SACRIFICADA, CALCINADA o devuelta a tu mano, regresa al Criadero.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "com_t2_tatuaje",
+   "set": "t2",
+   "tipo": "comun",
+   "nombre": "Dragón con Tatuaje de Titán",
+   "texto": "Dice que no le dolió. Mintió.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_t2_disfraz",
+   "set": "t2",
+   "tipo": "comun",
+   "nombre": "Dragón Disfrazado de Titán",
+   "texto": "No es un disfraz, es un estilo de vida.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_t2_aprendiz",
+   "set": "t2",
+   "tipo": "comun",
+   "nombre": "Dragón Aprendiz",
+   "texto": "Todo gran dragón empezó lavando calderos.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "com_t2_apostador",
+   "set": "t2",
+   "tipo": "comun",
+   "nombre": "Dragón Apostador",
+   "texto": "Lanza los dados. Siempre saca crítico. Dice.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "anc_cazatitanes",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Dragón Cazatitanes",
+   "texto": "Tus dragones no pueden ser CALCINADOS por cartas con «Titán» en el nombre.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_domador",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Domador de Titanes",
+   "texto": "Al entrar en tu guarida, busca en el mazo una carta con «Titán» en el nombre y agrégala a tu mano. Baraja el mazo.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_jinete",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Jinete de Titanes",
+   "texto": "Al entrar en tu guarida, puedes SACRIFICAR una carta. Si lo haces, mueve una Reliquia o Maldición de cualquier guarida a cualquier otra.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_titan",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Dragón Titán",
+   "texto": "Si este dragón sale de tu guarida, CALCINA un dragón.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_titan_furioso",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Titán Furioso",
+   "texto": "Al entrar en tu guarida, cada jugador (tú incluido) DESCARTA una carta.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_invocador",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Invocador de Titanes",
+   "texto": "Al entrar en tu guarida, busca en las Cenizas una carta con «Titán» en el nombre y agrégala a tu mano.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_tortuga",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Titán Tortuga",
+   "texto": "Al entrar en tu guarida, ROBA una carta.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "anc_titan_amigo",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Titán Amistoso",
+   "texto": "Al entrar en tu guarida, cada jugador puede ROBAR una carta.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "anc_mago",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Dragón Mago",
+   "texto": "Al entrar en tu guarida, puedes buscar en el mazo un Hechizo y agregarlo a tu mano. Baraja el mazo.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "anc_escamado",
+   "set": "t2",
+   "tipo": "ancestral",
+   "nombre": "Dragón Escamado Volador",
+   "texto": "Al entrar en tu guarida, cada jugador SACRIFICA una carta. Si este dragón fuera a ser SACRIFICADO o CALCINADO, devuélvelo a tu mano.",
+   "cantidad": 2,
+   "tags": [
+    "regresa"
+   ]
+  },
+  {
+   "id": "hec_aliento_titan",
+   "set": "t2",
+   "tipo": "hechizo",
+   "nombre": "Aliento de Titán",
+   "texto": "CALCINA un dragón.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "hec_fuego_titan",
+   "set": "t2",
+   "tipo": "hechizo",
+   "nombre": "Fuego de Titán",
+   "texto": "SACRIFICA o CALCINA una Reliquia o una Maldición.",
+   "cantidad": 3,
+   "tags": []
+  },
+  {
+   "id": "hec_guaridas_quemadas",
+   "set": "t2",
+   "tipo": "hechizo",
+   "nombre": "Guaridas Calcinadas",
+   "texto": "Cada jugador SACRIFICA todas sus Reliquias y Maldiciones.",
+   "cantidad": 1,
+   "tags": []
+  },
+  {
+   "id": "hec_beso_titan",
+   "set": "t2",
+   "tipo": "hechizo",
+   "nombre": "Beso de Titán",
+   "texto": "Busca en el mazo un Hechizo y juégalo de inmediato. Baraja el mazo.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "mal_maldicion_titan",
+   "set": "t2",
+   "tipo": "maldicion",
+   "nombre": "Maldición del Titán",
+   "texto": "Al inicio de tu turno, DESCARTA una carta.",
+   "cantidad": 2,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "mal_desgracia_titan",
+   "set": "t2",
+   "tipo": "maldicion",
+   "nombre": "Desgracia del Titán",
+   "texto": "Al inicio de tu turno, baraja una carta de tu mano dentro del mazo.",
+   "cantidad": 2,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "mal_cielos_titan",
+   "set": "t2",
+   "tipo": "maldicion",
+   "nombre": "Cielos de Titán",
+   "texto": "Al inicio de tu turno, baraja un dragón de tu guarida dentro del mazo y luego ROBA una carta.",
+   "cantidad": 1,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_bendicion_titan",
+   "set": "t2",
+   "tipo": "reliquia",
+   "nombre": "Bendición del Titán",
+   "texto": "Las Maldiciones de tu guarida no tienen efecto.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "rel_fortuna_titan",
+   "set": "t2",
+   "tipo": "reliquia",
+   "nombre": "Fortuna del Titán",
+   "texto": "Al inicio de tu turno, puedes SACRIFICAR esta carta. Si lo haces, juega un turno extra al terminar este.",
+   "cantidad": 2,
+   "tags": [
+    "inicio"
+   ]
+  },
+  {
+   "id": "rel_proteccion_titan",
+   "set": "t2",
+   "tipo": "reliquia",
+   "nombre": "Protección del Titán",
+   "texto": "Tus dragones no pueden ser CALCINADOS ni afectados por efectos de cartas de otros jugadores.",
+   "cantidad": 2,
+   "tags": []
+  },
+  {
+   "id": "grrr_bestia",
+   "set": "t2",
+   "tipo": "instantanea",
+   "nombre": "¡GRRR, Bestia Inmunda!",
+   "texto": "Juega esta carta cuando otro jugador intente jugar una carta. Esa carta no entra en juego y va a Cenizas.",
+   "cantidad": 6,
+   "tags": [
+    "grrr"
+   ]
+  }
+ ]
+}

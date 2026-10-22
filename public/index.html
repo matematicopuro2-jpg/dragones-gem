@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dragones Inestables</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
+</head>
+<body>
+<div id="mathfondo" aria-hidden="true"><svg class="fibo" viewBox="0 0 89 55"><g fill="none" stroke="currentColor" stroke-width=".35"><rect x="0" y="0" width="55" height="55"/><rect x="55" y="0" width="34" height="34"/><rect x="68" y="34" width="21" height="21"/><rect x="55" y="42" width="13" height="13"/><rect x="55" y="34" width="8" height="8"/><path d="M55 55 A55 55 0 0 1 0 0" transform="translate(0 0)"/><path d="M0 55 A55 55 0 0 1 55 0 A34 34 0 0 1 89 34 A21 21 0 0 1 68 55 A13 13 0 0 1 55 42 A8 8 0 0 1 63 34"/></g></svg></div>
+<div id="embers"></div>
+
+<!-- PORTADA -->
+<section id="portada" class="pantalla">
+  <div class="gem-portada"><img src="gem.png" alt="GEM"><span>Grupo de estudio<br><b>GEM</b></span></div>
+  <div style="position:absolute;top:12px;right:12px;z-index:5;display:flex;gap:6px"><button class="btn chico btn-musica" onclick="MUSICA.alternar()">🎵</button><button class="btn chico btn-estilo" title="Cambiar estilo de ilustraciones">🎨 Estilo</button><button id="btnPantalla2" class="btn chico" title="Modo compacto">⛶ Modo compacto</button></div>
+  <div class="titulo-wrap">
+    <div class="logo-dragon" id="logoArt"></div>
+    <h1>Dragones<br><span>Inestables</span></h1>
+    <p class="lema">Construye tu horda. Calcina a tus amigos. Ruge.</p>
+    <blockquote class="frase" id="frase"></blockquote>
+  </div>
+  <div class="panel entrada">
+    <label>Tu nombre<input id="inNombre" maxlength="18" placeholder="Ej. Miguel"></label>
+    <button id="btnCrear" class="btn fuego">Crear sala</button>
+    <div class="solo">
+      <b>🤖 Modo solitario</b>
+      <div class="fila"><select id="selBots"><option value="1">1 bot</option><option value="2">2 bots</option><option value="3" selected>3 bots</option><option value="4">4 bots</option><option value="5">5 bots</option></select>
+      <select id="selNivel"><option value="facil">Fácil</option><option value="normal" selected>Normal</option><option value="dificil">Difícil</option></select></div>
+      <button id="btnSolo" class="btn">Jugar contra bots</button>
+    </div>
+    <div class="o">o únete con un código</div>
+    <div class="fila"><input id="inCodigo" maxlength="4" placeholder="ABCD" class="codigo"><button id="btnUnirse" class="btn">Unirse</button></div>
+  </div>
+  <div class="gem-bloque" id="gemBloque">
+    <img src="gem.png" alt="GEM">
+    <div class="gem-txt"><div class="gem-titulo" id="gemTitulo"></div><div class="gem-lema" id="gemLema"></div><p id="gemDesc"></p><div class="gem-redes" id="gemRedes"></div></div>
+  </div>
+  <div class="ranking" id="ranking">
+    <div class="rk-cab"><b>🏆 Ranking de victorias</b><div class="rk-tabs"><button class="on" data-modo="humanos">👥 Con amigos</button><button data-modo="bots">🤖 Contra bots</button></div></div>
+    <ol id="rkLista"></ol><p class="rk-nota" id="rkNota"></p>
+  </div>
+  <footer class="gem-pie">Un juego del <b>GEM</b> · Dragones Inestables</footer>
+</section>
+
+<!-- SALA DE ESPERA -->
+<section id="sala" class="pantalla oculto">
+  <div class="panel sala-panel">
+    <h2>Sala <span id="salaCodigo" class="codigo-grande"></span> <button class="btn chico btn-musica" onclick="MUSICA.alternar()" style="float:right">🎵</button><button class="btn chico" id="btnSalirSala" style="float:right;margin-right:6px">🚪 Salir</button></h2>
+    <p class="sub">Enlace para tus amigos (pégalo en Discord):<br><code id="enlaceSala" style="color:var(--oro);user-select:all;word-break:break-all"></code> <button id="btnCopiar" class="btn chico">Copiar enlace</button></p>
+    <div class="cols">
+      <div>
+        <h3>Jugadores <small id="numJug"></small></h3>
+        <ul id="listaJug" class="lista-jug"></ul>
+        <div id="panelBots" class="fila" style="margin-top:8px"><select id="nivelBot"><option value="facil">Fácil</option><option value="normal" selected>Normal</option><option value="dificil">Difícil</option></select><button id="btnBot" class="btn chico">+ Agregar bot</button></div>
+      </div>
+      <div>
+        <h3>Temporadas</h3>
+        <div id="sets"></div>
+        <h3>Opciones</h3>
+        <label class="opt">Dragones para ganar
+          <select id="selMeta"><option value="">Automático (7, o 6 con 6–8 jugadores)</option>
+            <option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></label>
+        <label class="opt chk"><input type="checkbox" id="chkVac"> Vacuidad: si no puedes pagar el costo completo de un efecto («puedes DESCARTAR 2… si lo haces…»), no pagas nada y el efecto ocurre igual</label>
+        <label class="opt chk"><input type="checkbox" id="chkDos"> Reglas oficiales para 2 jugadores (se quitan los Dragones Comunes y algunas cartas, y cada uno empieza con un ¡GRRR! extra)</label>
+        <p id="infoMazo" class="sub"></p>
+      </div>
+    </div>
+    <button id="btnIniciar" class="btn fuego grande">¡A jugar!</button>
+    <p id="esperaHost" class="sub oculto">Esperando a que el anfitrión inicie la partida…</p>
+  </div>
+</section>
+
+<!-- MESA -->
+<section id="mesa" class="pantalla oculto">
+  <header class="barra">
+    <div class="marca"><img src="gem.png" alt="GEM" class="gem-mini"> <b>Dragones Inestables</b> <span class="codigo-chip" id="mesaCodigo"></span></div>
+    <div id="turnoInfo" class="turno-info"></div>
+    <div class="acciones">
+      <button id="btnRobar" class="btn">Robar</button>
+      <button id="btnFin" class="btn fuego">Terminar turno</button>
+      <button class="btn chico btn-musica" onclick="MUSICA.alternar()">🎵</button>
+      <button class="btn chico btn-estilo" title="Cambiar estilo de ilustraciones">🎨</button>
+      <button id="btnPantalla" class="btn chico" title="Modo compacto">⛶</button>
+      <button id="btnMas" class="btn chico">⋯</button>
+    </div>
+  </header>
+
+  <div class="tablero">
+    <div id="rivales" class="rivales"></div>
+
+    <aside class="centro">
+      <div class="pila" id="pilaMazo" title="Mazo">
+        <div class="dorso"><span>🐉</span></div><b id="numMazo">0</b><small>Mazo</small>
+      </div>
+      <div class="pila" id="pilaCenizas" title="Cenizas (descarte)">
+        <div id="topeCenizas" class="vacia">Cenizas</div><b id="numCenizas">0</b><small>Cenizas</small>
+      </div>
+      <div class="pila" id="pilaCriadero" title="Criadero">
+        <div class="dorso blanco"><span>🥚</span></div><b id="numCriadero">0</b><small>Criadero</small>
+      </div>
+      <div class="feed" id="feed"></div>
+      <div class="bitacora oculto" id="bitacora"></div>
+    </aside>
+
+    <section class="mio">
+      <div class="mio-cab"><h3>Tu guarida <span id="miCuenta" class="cuenta"></span></h3><div id="miAviso" class="aviso-inicio"></div></div>
+      <div id="miGuarida" class="guarida grande"></div>
+      <div class="mio-cab"><h3>Tu mano <small id="miManoN"></small></h3></div>
+      <div id="miMano" class="mano"></div>
+    </section>
+  </div>
+</section>
+
+<!-- capas -->
+<div id="vista" class="vista-carta oculto"></div>
+<div id="menu" class="menu oculto"></div>
+<div id="modal" class="modal oculto"><div class="modal-caja"><div class="modal-cab"><h3 id="modalTitulo"></h3><button class="btn chico" id="modalCerrar">Cerrar</button></div><div id="modalCuerpo" class="modal-cuerpo"></div></div></div>
+<div id="ventana" class="ventana oculto"></div>
+<div id="eleccion" class="modal eleccion oculto"><div class="modal-caja"><div class="modal-cab"><h3 id="elTitulo"></h3></div><div id="elCuerpo" class="modal-cuerpo"></div><div id="elPie" class="el-pie"></div></div></div>
+<div id="esperando" class="esperando oculto"></div>
+<div id="victoria" class="victoria oculto"></div>
+<div id="toast" class="toast"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="gem.js"></script>
+<script src="musica.js"></script>
+<script src="art.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

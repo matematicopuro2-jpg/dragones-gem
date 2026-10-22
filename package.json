@@ -1,0 +1,15 @@
+{
+  "name": "dragones-inestables",
+  "version": "1.0.0",
+  "description": "Juego de cartas de dragones para jugar con amigos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
