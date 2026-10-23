@@ -24,12 +24,25 @@ function Boton($txt, $x, $accion) {
 $script:enlace = ""
 $bCopiar = Boton "Copiar enlace" 20 { [System.Windows.Forms.Clipboard]::SetText($script:enlace); $nota.Text = "Copiado. Pegalo en WhatsApp con Ctrl+V." }
 $bAbrir = Boton "Abrir el juego" 195 { Start-Process "http://localhost:3000" }
-$bParar = Boton "Detener servidor" 370 { $estado.Text = "Deteniendo..."; [System.Windows.Forms.Application]::DoEvents(); docker compose stop | Out-Null; $estado.Text = "Servidor detenido. Ya puedes cerrar esta ventana."; $bParar.Enabled = $false }
+$bParar = Boton "Detener servidor" 370 { $estado.Text = "Deteniendo..."; [System.Windows.Forms.Application]::DoEvents(); & $script:docker compose stop | Out-Null; $estado.Text = "Servidor detenido. Ya puedes cerrar esta ventana."; $bParar.Enabled = $false }
 function Paso($t) { $estado.Text = $t; [System.Windows.Forms.Application]::DoEvents() }
 function Esperar($seg) { $fin = (Get-Date).AddSeconds($seg); while ((Get-Date) -lt $fin) { Start-Sleep -Milliseconds 150; [System.Windows.Forms.Application]::DoEvents() } }
-function Correr($exe, $argumentos) {   # ejecuta sin congelar la ventana
-  $p = Start-Process $exe -ArgumentList $argumentos -NoNewWindow -PassThru -RedirectStandardOutput "$env:TEMP\dragones_out.txt" -RedirectStandardError "$env:TEMP\dragones_err.txt"
+$script:docker = (Get-Command docker -ErrorAction SilentlyContinue).Source
+if (-not $script:docker) { $script:docker = @("$env:LOCALAPPDATA\Programs\DockerDesktop\resources\bin\docker.exe", "$env:ProgramFiles\Docker\Docker\resources\bin\docker.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1 }
+$script:log = Join-Path $PSScriptRoot "registro.txt"
+"=== $(Get-Date)  docker: $script:docker" | Set-Content $script:log
+function Correr($exe, $argumentos) {   # ejecuta sin congelar la ventana; anota todo en registro.txt
+  if ($exe -eq "docker") { $exe = $script:docker; if (-not $exe) { Add-Content $script:log "docker.exe no encontrado"; return 1 } }
+  $si = New-Object System.Diagnostics.ProcessStartInfo
+  $si.FileName = $exe; $si.Arguments = $argumentos; $si.WorkingDirectory = $raiz
+  $si.UseShellExecute = $false; $si.CreateNoWindow = $true; $si.RedirectStandardOutput = $true; $si.RedirectStandardError = $true
+  if ($env:ENLACE_LAN) { $si.EnvironmentVariables["ENLACE_LAN"] = $env:ENLACE_LAN }
+  $p = [System.Diagnostics.Process]::Start($si)
+  $o = $p.StandardOutput.ReadToEndAsync(); $e = $p.StandardError.ReadToEndAsync()
   while (-not $p.HasExited) { Start-Sleep -Milliseconds 200; [System.Windows.Forms.Application]::DoEvents() }
+  $p.WaitForExit()
+  $err = $e.Result; if ($err.Length -gt 1500) { $err = $err.Substring($err.Length - 1500) }
+  Add-Content $script:log "> $argumentos  => codigo $($p.ExitCode)`n$err"
   return $p.ExitCode }
 
 $f.Add_Shown({
@@ -38,7 +51,8 @@ $f.Add_Shown({
     Paso "Revisando Docker..."
     if ((Correr "docker" "info") -ne 0) {
       Paso "Abriendo Docker Desktop (puede tardar un minuto)..."
-      $dd = Join-Path $env:ProgramFiles "Docker\Docker\Docker Desktop.exe"; if (Test-Path $dd) { Start-Process $dd }
+      $dd = @("$env:LOCALAPPDATA\Programs\DockerDesktop\Docker Desktop.exe", "$env:ProgramFiles\Docker\Docker\Docker Desktop.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1
+      if ($dd) { Start-Process $dd } else { Paso "No encuentro Docker Desktop. Abrelo a mano; sigo esperando..." }
       $ok = $false; for ($i = 0; $i -lt 60; $i++) { Esperar 3; if ((Correr "docker" "info") -eq 0) { $ok = $true; break } }
       if (-not $ok) { Paso "Docker no respondio. Abre Docker Desktop y vuelve a intentar."; return }
     }
@@ -48,7 +62,7 @@ $f.Add_Shown({
     $script:enlace = "http://${ip}:3000"; $env:ENLACE_LAN = $script:enlace
     # 3) levantar el juego
     Paso "Iniciando el juego (la primera vez tarda 1-2 minutos)..."
-    if ((Correr "docker" "compose up -d --build") -ne 0) { Paso "Error al iniciar. Detalle en: $env:TEMP\dragones_err.txt"; return }
+    if ((Correr "docker" "compose up -d --build") -ne 0) { Paso "Error al iniciar. Detalle en pc\registro.txt"; return }
     for ($i = 0; $i -lt 30; $i++) { try { Invoke-WebRequest "http://localhost:3000/api/enlace" -UseBasicParsing -TimeoutSec 2 | Out-Null; break } catch { Esperar 1 } }
     # 4) mostrar enlace
     [System.Windows.Forms.Clipboard]::SetText($script:enlace)
