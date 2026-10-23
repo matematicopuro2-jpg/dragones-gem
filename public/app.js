@@ -21,7 +21,7 @@ Promise.all([fetch("cartas.json").then(r => r.json()), fetch("/api/arte").then(r
   if (q) $("#inCodigo").value = q.toUpperCase();
   $("#inNombre").value = store.get("di_nombre") || "";
   const ult = store.get("di_sala");
-  if (ult && (!q || q === ult.toUpperCase())) socket.emit("unirse", { code: ult, name: store.get("di_nombre") || "Jugador", pid: PID, silencioso: true });
+  if (ult && (!q || q === ult.toUpperCase())) socket.emit("unirse", { code: ult, name: store.get("di_nombre") || "Jugador", pid: PID, token: store.get("di_token"), silencioso: true });
 });
 
 // ───────── brasas de fondo ─────────
@@ -225,7 +225,7 @@ socket.on("verLista", ({ titulo, zona, owner, cartas }) => abrirModal(titulo, ca
 // ───────── portada y sala ─────────
 function nombre() { const n = $("#inNombre").value.trim(); if (!n) { toast("Escribe tu nombre primero"); $("#inNombre").focus(); return null; } store.set("di_nombre", n); return n; }
 $("#btnCrear").onclick = () => { const n = nombre(); if (n) socket.emit("crear", { name: n, pid: PID }); };
-$("#btnUnirse").onclick = () => { const n = nombre(); const c = $("#inCodigo").value.trim(); if (!c) return toast("Escribe el código de la sala"); if (n) socket.emit("unirse", { code: c, name: n, pid: PID }); };
+$("#btnUnirse").onclick = () => { const n = nombre(); const c = $("#inCodigo").value.trim(); if (!c) return toast("Escribe el código de la sala"); if (n) socket.emit("unirse", { code: c, name: n, pid: PID, token: store.get("di_token") }); };
 $("#inCodigo").addEventListener("keydown", e => { if (e.key === "Enter") $("#btnUnirse").click(); });
 let ENLACE_PUBLICO = null;
 function cargarEnlace() { fetch("/api/enlace").then(r => r.json()).then(d => { ENLACE_PUBLICO = d.url; if (S && !S.started) renderSala(); }).catch(() => {}); }

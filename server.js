@@ -17,8 +17,18 @@ const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; cha
   ".json": "application/json; charset=utf-8", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
   ".webp": "image/webp", ".svg": "image/svg+xml", ".ico": "image/x-icon", ".mp3": "audio/mpeg" };
 const EDIT = path.join(__dirname, "EDITAR_ARTE");   // aquí van las imágenes *_edit.jpg hechas a mano
-const httpServer = http.createServer((req, res) => {
+const A = require("./almacen"), CUENTAS = require("./cuentas");
+function json(res, code, obj) { res.writeHead(code, { "Content-Type": MIME[".json"], "Cache-Control": "no-store" }); res.end(JSON.stringify(obj)); }
+function cuerpo(req) { return new Promise(ok => { let b = ""; req.on("data", d => { b += d; if (b.length > 1e4) req.destroy(); }); req.on("end", () => { try { ok(JSON.parse(b || "{}")); } catch { ok({}); } }); }); }
+const httpServer = http.createServer(async (req, res) => {
   let url = decodeURIComponent(req.url.split("?")[0]);
+  if (url.startsWith("/api/auth/") && req.method === "POST") {
+    const b = await cuerpo(req);
+    if (url === "/api/auth/codigo") return json(res, 200, await CUENTAS.pedirCodigo(b.email));
+    if (url === "/api/auth/verificar") return json(res, 200, CUENTAS.verificar(b.email, b.codigo, b.nombre));
+    if (url === "/api/auth/salir") { CUENTAS.cerrar(b.token); return json(res, 200, { ok: true }); }
+  }
+  if (url === "/api/yo") return json(res, 200, { usuario: CUENTAS.deToken(req.headers["x-token"]), persistente: A.persistente() });
   if (url === "/api/enlace") {
     res.writeHead(200, { "Content-Type": MIME[".json"] });
     return res.end(JSON.stringify({ url: ENLACE }));
@@ -45,12 +55,35 @@ const io = new Server(httpServer);
 // ───────────── ranking de victorias (servidor propio) ─────────────
 const RANK_FILE = path.join(__dirname, "data", "ranking.json");
 let RANKING = []; try { RANKING = JSON.parse(fs.readFileSync(RANK_FILE, "utf8")); } catch {}
-function guardarRanking() { try { fs.mkdirSync(path.dirname(RANK_FILE), { recursive: true }); fs.writeFileSync(RANK_FILE, JSON.stringify(RANKING.slice(-5000))); } catch {} }
+function guardarRanking() { RANKING = RANKING.slice(-5000); A.set("ranking", RANKING); }
 function anotarVictoria(r) {
   if (!r.winner || r.rankAnotado) return; r.rankAnotado = true;
   const humanos = r.players.filter(p => !p.bot).length, modo = humanos >= 2 ? "humanos" : "bots";
   for (const n of r.winner.names) { const p = r.players.find(x => x.name === n); if (p && !p.bot) RANKING.push({ nombre: p.name, modo, t: Date.now() }); }
   guardarRanking(); if (typeof io !== "undefined" && io.emit) io.emit("ranking", RANKING);
+}
+
+// ───────────── torneos ─────────────
+const TORNEOS = require("./torneos")({
+  crearMesa(t, ronda, idx) {
+    const m = ronda.mesas[idx];
+    if (m.codigo && rooms.has(m.codigo)) { const v = rooms.get(m.codigo); clearTimeout(v.timer); rooms.delete(m.codigo); }
+    const r = crearSala("torneo"); r.sets = t.sets && t.sets.length ? t.sets : ["t1"];
+    r.torneo = { tid: t.id, ronda: ronda.n, mesa: idx, nombre: t.nombre + (ronda.final ? " · Mesa Final" : ` · Ronda ${ronda.n} · Mesa ${idx + 1}`) };
+    r.esperados = m.jugadores.map(j => ({ pid: j.pid, nombre: j.nombre, email: j.email }));
+    log(r, `🏆 ${r.torneo.nombre}. La partida empieza sola cuando lleguen todos.`);
+    return r.code;
+  },
+  avisar() { if (typeof io !== "undefined") for (const s of io.sockets.sockets.values()) s.emit("torneos", TORNEOS.lista(s.usuario)); },
+});
+function cerrarMesaTorneo(r) {
+  if (!r.torneo || r.torneoAnotado) return; r.torneoAnotado = true;
+  const email = pid => (r.esperados.find(e => e.pid === pid) || {}).email;
+  const win = new Set(r.winner ? r.winner.names : []);
+  const orden = [...r.players].filter(p => email(p.pid)).sort((a, b) => (win.has(b.name) - win.has(a.name)) || contarDragones(b) - contarDragones(a));
+  for (const e of r.esperados) if (!orden.some(p => p.pid === e.pid)) orden.push({ pid: e.pid, stable: [] });
+  const dr = {}; for (const p of orden) dr[email(p.pid)] = p.hand ? contarDragones(p) : 0;
+  TORNEOS.resultado(r.torneo.tid, r.torneo.ronda, r.torneo.mesa, orden.map(p => email(p.pid)), dr);
 }
 
 // ───────────── utilidades ─────────────
@@ -294,6 +327,7 @@ function vista(r, pid) {
 }
 function emitir(r) {
   if (r.winner && !r.rankAnotado && typeof anotarVictoria === "function" && !(typeof window !== "undefined")) anotarVictoria(r);
+  if (r.winner && r.torneo) cerrarMesaTorneo(r);
   for (const p of r.players) if (p.sid) io.to(p.sid).emit("estado", vista(r, p.pid));
 }
 
@@ -306,6 +340,11 @@ io.on("connection", sock => {
 
   function entrar(r, pid, name) {
     name = String(name || "Jugador").slice(0, 18).trim() || "Jugador";
+    if (r.torneo) {
+      const u = sock.usuario, e = u && r.esperados.find(x => x.pid === u.pid);
+      if (!e) return err("Esta es una mesa de torneo: solo pueden entrar sus jugadores (con su cuenta).");
+      pid = u.pid; name = e.nombre;
+    }
     let p = P(r, pid);
     if (!p) {
       if (r.started) return err("La partida ya empezó. Pide al anfitrión que la reinicie.");
@@ -315,11 +354,36 @@ io.on("connection", sock => {
     }
     p.sid = sock.id; p.connected = true; p.name = name;
     sala = r; yo = pid; sock.join(r.code);
+    if (r.torneo && !r.started && r.esperados.every(e => { const q = P(r, e.pid); return q && q.connected; })) { log(r, "🏆 ¡Llegaron todos! Empieza la partida del torneo."); iniciar(r); }
     emitir(r);
   }
+  const usar = token => { if (token) sock.usuario = CUENTAS.deToken(token) || sock.usuario; };
+  sock.on("sesion", ({ token } = {}) => { sock.usuario = CUENTAS.deToken(token); sock.emit("torneos", TORNEOS.lista(sock.usuario)); });
+  const tRes = e => { if (e) err(e); };
+  sock.on("tInscribir", ({ id, si }) => tRes(TORNEOS.inscribir(sock.usuario, id, si !== false)));
+  sock.on("tCrear", d => tRes(TORNEOS.crear(sock.usuario, d || {})));
+  sock.on("tSiguiente", ({ id }) => tRes(TORNEOS.siguiente(sock.usuario, id)));
+  sock.on("tRehacer", ({ id, mesa }) => tRes(TORNEOS.rehacerMesa(sock.usuario, id, +mesa)));
+  sock.on("tEliminar", ({ id }) => tRes(TORNEOS.eliminar(sock.usuario, id)));
+  sock.on("tCerrarMesa", ({ id, mesa }) => { // el organizador da por terminada una mesa (gana quien tenga más dragones)
+    const u = sock.usuario; if (!u || !u.admin) return err("Solo los organizadores pueden hacer eso.");
+    const t = TORNEOS.buscar(id); const ro = t && t.rondas[t.rondas.length - 1]; const m = ro && ro.mesas[+mesa]; if (!m || m.resultado) return;
+    const r = rooms.get(m.codigo);
+    if (r && r.torneo) { if (!r.winner) { const pts = r.players.map(contarDragones), mx = Math.max(...pts, 0); r.winner = { names: r.players.filter((p, i) => pts[i] === mx && r.started).map(p => p.name), motivo: "El organizador cerró la mesa" }; } cerrarMesaTorneo(r); emitir(r); }
+    else TORNEOS.resultado(id, ro.n, +mesa, m.jugadores.map(j => j.email), {});
+  });
+  sock.on("tMesa", ({ id, token }) => {
+    usar(token); const u = sock.usuario; if (!u) return err("Entra con tu correo primero.");
+    const t = TORNEOS.buscar(id); const ro = t && t.rondas[t.rondas.length - 1];
+    const m = ro && ro.mesas.find(m => !m.resultado && m.jugadores.some(j => j.email === u.email));
+    if (!m) return err("No tienes una mesa pendiente en este torneo.");
+    const r = rooms.get(m.codigo); if (!r) return err("La mesa no está activa. Avisa al organizador para que la rehaga.");
+    entrar(r, u.pid, u.nombre);
+  });
 
   sock.on("crear", ({ name, pid }) => { if (!pid) return; const r = crearSala(pid); entrar(r, pid, name); });
-  sock.on("unirse", ({ code, name, pid }) => {
+  sock.on("unirse", ({ code, name, pid, token }) => {
+    usar(token);
     const r = rooms.get(String(code || "").toUpperCase().trim());
     if (!r) return err("No existe una sala con ese código.");
     if (!pid) return; entrar(r, pid, name);
@@ -489,7 +553,7 @@ io.on("connection", sock => {
     if (!p) return;
     if (r.prompt && r.prompt.pid === p.pid) r.prompt.fin(BOTS.elegirBot(r, p, r.prompt.req, true));
     const otrosHumanos = r.players.some(x => x !== p && !x.bot && x.connected);
-    if (!otrosHumanos) { clearTimeout(r.timer); rooms.delete(r.code); return; }
+    if (!otrosHumanos && !r.torneo) { clearTimeout(r.timer); rooms.delete(r.code); return; }
     if (!r.started) { r.players = r.players.filter(x => x !== p); if (r.host === p.pid && r.players[0]) r.host = (r.players.find(x => !x.bot) || r.players[0]).pid; }
     else { p.connected = false; p.sid = null; if (r.host === p.pid) { const h = r.players.find(x => !x.bot && x.connected); if (h) r.host = h.pid; } }
     if (r.started && !r.winner && r.players[r.turn] === p && !r.ocupado) { r.pending = null; clearTimeout(r.timer); pasarTurno(r); }
@@ -502,7 +566,7 @@ io.on("connection", sock => {
     if (!sala.started) { sala.players = sala.players.filter(x => x !== p); if (sala.host === yo && sala.players[0]) sala.host = sala.players[0].pid; }
     log(sala, `🔌 ${p.name} se desconectó.`);
     const humanos = r => r.players.some(x => x.connected && !x.bot);
-    if (!humanos(sala)) { const c = sala.code; setTimeout(() => { const r = rooms.get(c); if (r && !humanos(r)) { clearTimeout(r.timer); rooms.delete(c); } }, 30 * 60e3); }
+    if (!humanos(sala) && !sala.torneo) { const c = sala.code; setTimeout(() => { const r = rooms.get(c); if (r && !humanos(r)) { clearTimeout(r.timer); rooms.delete(c); } }, 30 * 60e3); }
     emitir(sala);
   });
 });
@@ -530,9 +594,12 @@ function abrirTunel() {
   process.on("SIGINT", () => { t.kill(); process.exit(); });
 }
 
-httpServer.listen(PORT, () => {
+A.iniciar().catch(e => { console.error("No se pudo conectar a la base de datos:", e.message); }).then(() => {
+  RANKING = A.get("ranking", RANKING);
+  httpServer.listen(PORT, () => {
   console.log("\n  🐉  DRAGONES INESTABLES  🐉");
   console.log(`  Servidor listo en  http://localhost:${PORT}`);
   console.log("  Creando el enlace público para tus amigos... (unos segundos)\n");
   abrirTunel();
+});
 });
