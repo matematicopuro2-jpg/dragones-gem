@@ -1,0 +1,15 @@
+# Dragones Inestables en tu PC (red local / wifi). No toca otros contenedores (p. ej. Overleaf).
+services:
+  dragones:
+    build: .
+    image: dragones-gem:local
+    container_name: dragones-gem
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      ENLACE_LAN: "${ENLACE_LAN:-}"
+    volumes:
+      - dragones_datos:/app/data
+volumes:
+  dragones_datos:

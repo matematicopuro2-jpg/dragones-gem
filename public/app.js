@@ -431,6 +431,8 @@ $("#pilaCenizas").onclick = () => abrirModal(`Cenizas (${S.discard.length})`, [.
 $("#pilaCriadero").onclick = () => abrirModal(`Criadero (${S.nursery.length})`, S.nursery, MANUAL ? clickLista("criadero") : null, "Crías disponibles en el Criadero.");
 $("#btnMas").onclick = e => { e.stopPropagation(); const host = S.host === S.me; menu(e, "Más acciones", [
   { t: "📖 Guía rápida", f: guia },
+  { t: "📜 Reglamento completo", f: () => reglamento() },
+  { t: "📚 Ver todas las cartas", f: () => catalogo() },
   { t: "📜 Historial de la partida", f: () => { $("#modalTitulo").textContent = "Historial de la partida"; $("#modalCuerpo").innerHTML = `<div class="bitacora" style="max-height:none;width:100%">${S.log.map(l => `<div class="${l.txt.startsWith("──") ? "turno" : ""}">${esc(l.txt).replace(/«(.+?)»/g, "<b>«$1»</b>")}</div>`).join("")}</div>`; $("#modal").classList.remove("oculto"); } },
   { t: MANUAL ? "🛠️ Desactivar modo manual" : "🛠️ Modo manual (corregir errores)", f: () => { MANUAL = !MANUAL; toast(MANUAL ? "Modo manual activo: puedes mover cualquier carta haciendo clic." : "Modo manual desactivado."); renderMesa(); } },
   ...(MANUAL ? [{ t: "♻️ Barajar las Cenizas dentro del mazo", f: () => socket.emit("barajar", { cenizas: true }) }, { t: "🔍 Buscar en el mazo", f: () => socket.emit("verMazo") }] : []),

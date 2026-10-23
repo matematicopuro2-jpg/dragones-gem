@@ -1,0 +1,18 @@
+DRAGONES INESTABLES - VERSION PARA TU PC (red wifi)
+=====================================================
+Requisito: Docker Desktop abierto (el mismo que usas para Overleaf).
+
+1) Doble clic en  pc\Iniciar Dragones.bat
+   - Abre el juego en tu navegador (http://localhost:3000)
+   - Muestra el enlace para los demas, por ejemplo http://192.168.1.25:3000
+2) Los demas, conectados a tu MISMO wifi, abren ese enlace en su celular o PC.
+   Crea una sala y comparte el codigo: juegan todos juntos.
+3) Si no les carga: ejecuta una vez  pc\Permitir en el firewall.bat
+   y verifica que tu wifi este como red "Privada".
+
+- Detener:     pc\Detener Dragones.bat
+- Actualizar:  pc\Actualizar Dragones.bat (baja lo ultimo de GitHub)
+- El juego usa el puerto 3000; Overleaf sigue en el 80. No se tocan entre si.
+- Se reinicia solo cuando prendes la PC si Docker Desktop arranca con Windows.
+- Torneos con correo: solo en la version web (dragones-gem.onrender.com),
+  porque necesitan el servicio de correo. Todo lo demas funciona sin internet.

@@ -291,3 +291,14 @@ body { background-image: linear-gradient(#3a7fc812 1px, transparent 1px), linear
 .t-mesas { font-size: 13px; margin-top: 6px; }
 .t-mesas div { padding: 3px 0; }
 .t-campeon { font-size: 16px; color: var(--gem-amarillo); margin-top: 6px; }
+
+.extras-botones { justify-content: center; gap: 8px; margin: 10px 0 14px; flex-wrap: wrap; }
+.cat-barra { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; }
+.cat-barra input, .cat-barra select { flex: 1 1 180px; min-width: 0; }
+.cat-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+.cat-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.cat-cant { font-size: 12px; color: #9fb3cc; }
+.reglas { line-height: 1.6; width: 100%; }
+.reglas details { border: 1px solid #2b4e7e; border-radius: 10px; padding: 6px 12px; margin: 8px 0; background: #13263f; }
+.reglas summary { cursor: pointer; font-weight: 700; color: var(--gem-amarillo); font-size: 16px; }
+.reglas ul, .reglas ol { padding-left: 20px; margin: 6px 0; }

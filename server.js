@@ -586,7 +586,7 @@ io.on("connection", sock => {
 });
 
 // ───────────── enlace público (Cloudflare Tunnel) ─────────────
-let ENLACE = null;
+let ENLACE = process.env.ENLACE_LAN || null;
 function abrirTunel() {
   const exe = path.join(__dirname, "tools", process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
   if (!fs.existsSync(exe) || process.env.SIN_TUNEL) return console.log("  (Sin túnel: solo se puede jugar en esta red)\n");
