@@ -20,6 +20,24 @@ const EDIT = path.join(__dirname, "EDITAR_ARTE");   // aquí van las imágenes *
 const A = require("./almacen"), CUENTAS = require("./cuentas");
 function json(res, code, obj) { res.writeHead(code, { "Content-Type": MIME[".json"], "Cache-Control": "no-store" }); res.end(JSON.stringify(obj)); }
 function cuerpo(req) { return new Promise(ok => { let b = ""; req.on("data", d => { b += d; if (b.length > 1e4) req.destroy(); }); req.on("end", () => { try { ok(JSON.parse(b || "{}")); } catch { ok({}); } }); }); }
+// Archivos estáticos en memoria, comprimidos (gzip) y con ETag: las visitas repetidas casi no descargan nada.
+const zlib = require("zlib"), CACHE_EST = new Map();
+function servir(req, res, file, url) {
+  let e = CACHE_EST.get(file);
+  if (!e) {
+    let buf; try { buf = fs.readFileSync(file); } catch { res.writeHead(404); return res.end("No encontrado"); }
+    const ext = path.extname(file).toLowerCase(), tipo = MIME[ext] || "application/octet-stream";
+    const comp = /text|json|svg|javascript/.test(tipo) && buf.length > 600 ? zlib.gzipSync(buf, { level: 9 }) : null;
+    e = { buf, comp, tipo, etag: '"' + require("crypto").createHash("md5").update(buf).digest("hex").slice(0, 16) + '"' };
+    if (!/_edit\./.test(file)) CACHE_EST.set(file, e);
+  }
+  const arte = url.startsWith("/art/") && !/_edit\./.test(url);
+  const h = { "Content-Type": e.tipo, ETag: e.etag, Vary: "Accept-Encoding",
+    "Cache-Control": arte || url === "/gem.png" ? "public, max-age=604800" : "public, max-age=0, must-revalidate" };
+  if (req.headers["if-none-match"] === e.etag) { res.writeHead(304, h); return res.end(); }
+  if (e.comp && /gzip/.test(req.headers["accept-encoding"] || "")) { h["Content-Encoding"] = "gzip"; res.writeHead(200, h); return res.end(e.comp); }
+  res.writeHead(200, h); res.end(e.buf);
+}
 const httpServer = http.createServer(async (req, res) => {
   let url = decodeURIComponent(req.url.split("?")[0]);
   if (url.startsWith("/api/auth/") && req.method === "POST") {
@@ -44,11 +62,7 @@ const httpServer = http.createServer(async (req, res) => {
   const file = path.normalize(path.join(PUB, url));
   if (!file.startsWith(PUB)) { res.writeHead(403); return res.end(); }
   const edit = /^\/art\/[^\/]+_edit\.(png|jpe?g|webp)$/i.test(url) ? path.join(EDIT, path.basename(url)) : null;
-  fs.readFile(edit && fs.existsSync(edit) ? edit : file, (err, buf) => {
-    if (err) { res.writeHead(404); return res.end("No encontrado"); }
-    res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream", "Cache-Control": "no-cache" });
-    res.end(buf);
-  });
+  servir(req, res, edit && fs.existsSync(edit) ? edit : file, url);
 });
 const io = new Server(httpServer);
 
